@@ -1,0 +1,42 @@
+{
+  "AssetName": "asset",
+  "TilingX": 8,
+  "TilingY": 4,
+  "Neutral": [ 2, 5, 7, 8, 9, 10, 13, 16 ],
+  "Animations": [
+    {
+      "Name": "standing",
+      "Duration": 1,
+      "Frames": "7"
+    },
+    {
+      "Name": "walking",
+      "Duration": 0.5,
+      "EntitySpeedScale": 0.2,
+      "EntitySpeedOffset": 0.3,
+      "Frames": "0-6"
+    },
+    {
+      "Name": "dizzy",
+      "Duration": 0.5,
+      "EntitySpeedScale": 0.2,
+      "EntitySpeedOffset": 0.3,
+      "Frames": "11-17"
+    },
+    {
+      "Name": "dashing",
+      "Duration": 1,
+      "Frames": "8"
+    },
+    {
+      "Name": "impactleft",
+      "Duration": 1,
+      "Frames": "9"
+    },
+    {
+      "Name": "impactright",
+      "Duration": 1,
+      "Frames": "10"
+    }
+  ]
+}

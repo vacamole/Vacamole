@@ -1,0 +1,25 @@
+{
+  "AssetName": "piggy-spritesheet-4x4a512",
+  "TilingX": 4,
+  "TilingY": 4,
+  "Neutral": [ 0, 4, 8 ],
+  "Animations": [
+    {
+      "Name": "neutral",
+      "Duration": 1,
+      "Frames": "0"
+    },
+    {
+      "Name": "walking",
+      "Duration": 0.8,
+      "EntitySpeedScale": 0.2,
+      "EntitySpeedOffset": 0.3,
+      "Frames": "0-7"
+    },
+    {
+      "Name": "hit",
+      "Duration": 1,
+      "Frames": "8"
+    }
+  ]
+}

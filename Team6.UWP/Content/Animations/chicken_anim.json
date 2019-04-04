@@ -1,0 +1,34 @@
+{
+  "AssetName": "chicken_walk-spritesheet_8x4_a512",
+  "TilingX": 8,
+  "TilingY": 4,
+  "Neutral": [ 4, 10, 16 ],
+  "Animations": [
+    {
+      "Name": "neutral",
+      "Duration": 1,
+      "Frames": "4,10"
+    },
+    {
+      "Name": "walking",
+      "Duration": 0.8,
+      "EntitySpeedScale": 0.4,
+      "EntitySpeedOffset": 0.3,
+      "Frames": "0-10"
+    },
+    {
+      "Name": "flapping",
+      "Duration": 0.5,
+      "EntitySpeedScale": 0.4,
+      "EntitySpeedOffset": 0.3,
+      "Frames": "10-15"
+    },
+    {
+      "Name": "eating",
+      "Duration": 0.8,
+      "EntitySpeedScale": 0.4,
+      "EntitySpeedOffset": 0.3,
+      "Frames": "16-22"
+    }
+  ]
+}

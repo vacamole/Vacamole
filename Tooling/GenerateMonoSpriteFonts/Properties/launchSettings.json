@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "GenerateMonoSpriteFonts": {
+      "commandName": "Project",
+      "commandLineArgs": "\"Grinched 2.0.ttf\" 12:256:4 \"E:\\Dev\\ETH\\gamelab-2017-team6\\Project\\Team6.UWP\\Content\\Fonts\\Grinched\\Grinched{size}.spritefont\" \"E:\\Dev\\ETH\\gamelab-2017-team6\\Project\\Team6.UWP\\Content\\Content.mgcb\" \"E:\\Dev\\ETH\\gamelab-2017-team6\\Project\\Team6.CXDesktop\\Content\\Content.mgcb\""
+    }
+  }
+}

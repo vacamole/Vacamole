@@ -1,0 +1,18 @@
+{
+  "AssetName": "attract_anim",
+  "TilingX": 4,
+  "TilingY": 2,
+  "Neutral": [ 6,7 ],
+  "Animations": [
+    {
+      "Name": "stopped",
+      "Duration": 1,
+      "Frames": "7"
+    },
+    {
+      "Name": "playing",
+      "Duration": 0.8,
+      "Frames": "0-6"
+    }
+  ]
+}

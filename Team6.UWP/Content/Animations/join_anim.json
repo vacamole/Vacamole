@@ -1,0 +1,13 @@
+{
+  "AssetName": "join_anim",
+  "TilingX": 4,
+  "TilingY": 4,
+  "Neutral": [ 0 ],
+  "Animations": [
+    {
+      "Name": "waiting",
+      "Duration": 1,
+      "Frames": "0-16"
+    }
+  ]
+}

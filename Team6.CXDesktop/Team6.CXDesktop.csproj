@@ -1,0 +1,537 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CCF3025D-CED1-4F6A-82E1-FEFFE9AD9191}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Team6</RootNamespace>
+    <AssemblyName>Team6.CXDesktop</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MonoGamePlatform>DesktopGL</MonoGamePlatform>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\$(MonoGamePlatform)\$(Platform)\$(Configuration)\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;LINUX</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>false</Prefer32Bit>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <OutputPath>bin\$(MonoGamePlatform)\$(Platform)\$(Configuration)\</OutputPath>
+    <DefineConstants>TRACE;LINUX</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>false</Prefer32Bit>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\Team6.UWP\Engine\Animations\Animation.cs">
+      <Link>Engine\Animations\Animation.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\Animations\DelayedAction.cs">
+      <Link>Engine\Animations\DelayedAction.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\Animations\Dispatcher.cs">
+      <Link>Engine\Animations\Dispatcher.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\Animations\DispatcherObject.cs">
+      <Link>Engine\Animations\DispatcherObject.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\Animations\EasingFunctions.cs">
+      <Link>Engine\Animations\EasingFunctions.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\Audio\AudioBuffer.cs">
+      <Link>Engine\Audio\AudioBuffer.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\Audio\AudioDefinition.cs">
+      <Link>Engine\Audio\AudioDefinition.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\Audio\AudioListenerComponent.cs">
+      <Link>Engine\Audio\AudioListenerComponent.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\Audio\AudioManager.cs">
+      <Link>Engine\Audio\AudioManager.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\Audio\AudioSourceComponent.cs">
+      <Link>Engine\Audio\AudioSourceComponent.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\Components\Component.cs">
+      <Link>Engine\Components\Component.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\Components\IAIComponent.cs">
+      <Link>Engine\Components\IAIComponent.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\Components\IUpdateableComponent.cs">
+      <Link>Engine\Components\IUpdateableComponent.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\Components\PhysicsComponent.cs">
+      <Link>Engine\Components\PhysicsComponent.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\Components\RaycastSensorComponent.cs">
+      <Link>Engine\Components\RaycastSensorComponent.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\Components\SensorComponent.cs">
+      <Link>Engine\Components\SensorComponent.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\Components\StateBasedAIBehaviorComponent.cs">
+      <Link>Engine\Components\StateBasedAIBehaviorComponent.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\Components\StateBasedAIComponent.cs">
+      <Link>Engine\Components\StateBasedAIComponent.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\Content\ContentJsonExtensions.cs">
+      <Link>Engine\Content\ContentJsonExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\Content\ILoadContent.cs">
+      <Link>Engine\Content\ILoadContent.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\Content\IUnloadContent.cs">
+      <Link>Engine\Content\IUnloadContent.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\EngineComponent.cs">
+      <Link>Engine\EngineComponent.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\Entities\Entity.cs">
+      <Link>Engine\Entities\Entity.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\Entities\EntityType.cs">
+      <Link>Engine\Entities\EntityType.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\Graphics2d\AnimatedSpriteComponent.cs">
+      <Link>Engine\Graphics2d\AnimatedSpriteComponent.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\Graphics2d\AnimationDefinition.cs">
+      <Link>Engine\Graphics2d\AnimationDefinition.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\Graphics2d\IDrawableComponent.cs">
+      <Link>Engine\Graphics2d\IDrawableComponent.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\Graphics2d\ParticleComponent.cs">
+      <Link>Engine\Graphics2d\ParticleComponent.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\Graphics2d\PhysicsEngineExtensions.cs">
+      <Link>Engine\Graphics2d\PhysicsEngineExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\Graphics2d\PrototypeShapeDrawerComponent.cs">
+      <Link>Engine\Graphics2d\PrototypeShapeDrawerComponent.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\Graphics2d\SpriteComponent.cs">
+      <Link>Engine\Graphics2d\SpriteComponent.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\Graphics2d\TextDisplayComponent.cs">
+      <Link>Engine\Graphics2d\TextDisplayComponent.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\Input\InputComponent.cs">
+      <Link>Engine\Input\InputComponent.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\Input\InputFrame.cs">
+      <Link>Engine\Input\InputFrame.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\Input\InputManager.cs">
+      <Link>Engine\Input\InputManager.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\Input\InputMapping.cs">
+      <Link>Engine\Input\InputMapping.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\MemoryManagement\ObjectPool.cs">
+      <Link>Engine\MemoryManagement\ObjectPool.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\MemoryManagement\ObjectPools.cs">
+      <Link>Engine\MemoryManagement\ObjectPools.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\MemoryManagement\SafeEnumerables.cs">
+      <Link>Engine\MemoryManagement\SafeEnumerables.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\Misc\DebugRenderer.cs">
+      <Link>Engine\Misc\DebugRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\Misc\DisplayUtilities.cs">
+      <Link>Engine\Misc\DisplayUtilities.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\Misc\EnumExt.cs">
+      <Link>Engine\Misc\EnumExt.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\Misc\IDebugDrawable.cs">
+      <Link>Engine\Misc\IDebugDrawable.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\Misc\IEnumerableExtensions.cs">
+      <Link>Engine\Misc\IEnumerableExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\Misc\KeyedSets.cs">
+      <Link>Engine\Misc\KeyedSets.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\Misc\ListExt.cs">
+      <Link>Engine\Misc\ListExt.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\Misc\MultiKeyedSets.cs">
+      <Link>Engine\Misc\MultiKeyedSets.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\Misc\RandomExt.cs">
+      <Link>Engine\Misc\RandomExt.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\Misc\SensorContactHelper.cs">
+      <Link>Engine\Misc\SensorContactHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\Misc\ServiceContainer.cs">
+      <Link>Engine\Misc\ServiceContainer.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\Misc\Settings.cs">
+      <Link>Engine\Misc\Settings.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\Misc\Timer.cs">
+      <Link>Engine\Misc\Timer.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\Misc\VectorExtensions.cs">
+      <Link>Engine\Misc\VectorExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\Renderer2d.cs">
+      <Link>Engine\Renderer2d.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\Scene.cs">
+      <Link>Engine\Scene.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\UI\HUDAnimatedComponent.cs">
+      <Link>Engine\UI\HUDAnimatedComponent.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\UI\HUDComponent.cs">
+      <Link>Engine\UI\HUDComponent.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\UI\HUDTextComponent.cs">
+      <Link>Engine\UI\HUDTextComponent.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Engine\UI\MultiSizeSpriteFont.cs">
+      <Link>Engine\UI\MultiSizeSpriteFont.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Game\Components\AIBehaviors\CohesianBehavior.cs">
+      <Link>Game\Components\AIBehaviors\CohesianBehavior.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Game\Components\AIBehaviors\FleeingBehavior.cs">
+      <Link>Game\Components\AIBehaviors\FleeingBehavior.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Game\Components\AIBehaviors\FollowingBehavior.cs">
+      <Link>Game\Components\AIBehaviors\FollowingBehavior.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Game\Components\AIBehaviors\HitBehavior.cs">
+      <Link>Game\Components\AIBehaviors\HitBehavior.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Game\Components\AIBehaviors\ObstacleAvoidanceBehaviour.cs">
+      <Link>Game\Components\AIBehaviors\ObstacleAvoidanceBehaviour.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Game\Components\AIBehaviors\PlayerFleeingBehavior.cs">
+      <Link>Game\Components\AIBehaviors\PlayerFleeingBehavior.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Game\Components\AIBehaviors\SeparationBehavior.cs">
+      <Link>Game\Components\AIBehaviors\SeparationBehavior.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Game\Components\AIBehaviors\VelocityMatchBehavior.cs">
+      <Link>Game\Components\AIBehaviors\VelocityMatchBehavior.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Game\Components\AIBehaviors\WanderingBehavior.cs">
+      <Link>Game\Components\AIBehaviors\WanderingBehavior.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Game\Components\AI\StayInBarnComponent.cs">
+      <Link>Game\Components\AI\StayInBarnComponent.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Game\Components\BarnComponent.cs">
+      <Link>Game\Components\BarnComponent.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Game\Components\MovementBasicsComponent.cs">
+      <Link>Game\Components\MovementBasicsComponent.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Game\Components\PlayerControllerComponent.cs">
+      <Link>Game\Components\PlayerControllerComponent.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Game\Components\CameraDirectorComponent.cs">
+      <Link>Game\Components\CameraDirectorComponent.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Game\Components\CenterCameraComponent.cs">
+      <Link>Game\Components\CenterCameraComponent.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Game\Components\ScoreComponent.cs">
+      <Link>Game\Components\ScoreComponent.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Game\Entities\AnimalEntity.cs">
+      <Link>Game\Entities\AnimalEntity.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Game\Entities\AnimalTypeFactory.cs">
+      <Link>Game\Entities\AnimalTypeFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Game\Entities\BarnEntity.cs">
+      <Link>Game\Entities\BarnEntity.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Game\Entities\BoarEntity.cs">
+      <Link>Game\Entities\BoarEntity.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Game\Entities\ChickenEntity.cs">
+      <Link>Game\Entities\ChickenEntity.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Game\Entities\EntityExtensions.cs">
+      <Link>Game\Entities\EntityExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Game\Entities\HUDListEntity.cs">
+      <Link>Game\Entities\HUDListEntity.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Game\Entities\PlayerEntity.cs">
+      <Link>Game\Entities\PlayerEntity.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Game\Misc\CattleWaveFactory.cs">
+      <Link>Game\Misc\CattleWaveFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Game\Misc\ForestTransitionGenerator.cs">
+      <Link>Game\Misc\ForestTransitionGenerator.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Game\Misc\GameConstants.cs">
+      <Link>Game\Misc\GameConstants.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Game\Misc\GameSettings.cs">
+      <Link>Game\Misc\GameSettings.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Game\Misc\InputFunctions.cs">
+      <Link>Game\Misc\InputFunctions.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Game\Misc\PlayerNamesDefinition.cs">
+      <Link>Game\Misc\PlayerNamesDefinition.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Game\Mode\PlayerAndGameInfo.cs">
+      <Link>Game\Mode\PlayerAndGameInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Game\Scenes\BasicGameScene.cs">
+      <Link>Game\Scene\BasicGameScene.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Game\Scenes\CenterSpawnGameScene.cs">
+      <Link>Game\Scene\CenterSpawnGameScene.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Game\Scenes\EndlessGameScene.cs">
+      <Link>Game\Scene\EndlessGameScene.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Game\Scenes\GameModeScene.cs">
+      <Link>Game\Scene\GameModeScene.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Game\Scenes\JoinScene.cs">
+      <Link>Game\Scene\JoinScene.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Game\Scenes\LoadingScene.cs">
+      <Link>Game\Scene\LoadingScene.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Game\Scenes\GameScene.cs">
+      <Link>Game\Scene\GameScene.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Game\Scenes\LevelSelectionScene.cs">
+      <Link>Game\Scene\LevelSelectionScene.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Game\Scenes\MainMenuScene.cs">
+      <Link>Game\Scene\MainMenuScene.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Game\Scenes\RightToLeftGameScene.cs">
+      <Link>Game\Scene\RightToLeftGameScene.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Game\Scenes\StartScreenScene.cs">
+      <Link>Game\Scene\StartScreenScene.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\Game\Scenes\WinScene.cs">
+      <Link>Game\Scene\WinScene.cs</Link>
+    </Compile>
+    <Compile Include="..\Team6.UWP\MainGame.cs">
+      <Link>MainGame.cs</Link>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Comora, Version=0.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Comora.0.0.5\lib\portable-net45+win8+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Comora.dll</HintPath>
+    </Reference>
+    <Reference Include="FarseerPhysics.Portable, Version=3.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FarseerPhysics.Portable.3.5.1\lib\portable-net4+sl4+wp8+win8\FarseerPhysics.Portable.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Framework">
+      <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\MonoGame.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Icon.ico" />
+    <EmbeddedResource Include="Icon.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x86\SDL2.dll">
+      <Link>x86\SDL2.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x64\SDL2.dll">
+      <Link>x64\SDL2.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x86\soft_oal.dll">
+      <Link>x86\soft_oal.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x64\soft_oal.dll">
+      <Link>x64\soft_oal.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x86\libSDL2-2.0.so.0">
+      <Link>x86\libSDL2-2.0.so.0</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x64\libSDL2-2.0.so.0">
+      <Link>x64\libSDL2-2.0.so.0</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x86\libopenal.so.1">
+      <Link>x86\libopenal.so.1</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x64\libopenal.so.1">
+      <Link>x64\libopenal.so.1</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\libSDL2-2.0.0.dylib">
+      <Link>libSDL2-2.0.0.dylib</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\libopenal.1.dylib">
+      <Link>libopenal.1.dylib</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\MonoGame.Framework.dll.config">
+      <Link>MonoGame.Framework.dll.config</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Content Include="..\Team6.UWP\Content\Animations\player_anim.json">
+      <Link>Content\Animations\player_anim.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\Team6.UWP\Content\Animations\attract_anim.json">
+      <Link>Content\Animations\attract_anim.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\Team6.UWP\Content\Animations\boar_anim.json">
+      <Link>Content\Animations\boar_anim.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\Team6.UWP\Content\Animations\scare_anim.json">
+      <Link>Content\Animations\scare_anim.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\Team6.UWP\Content\Animations\join_anim.json">
+      <Link>Content\Animations\join_anim.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\Team6.UWP\Content\Text\player_names_text.json">
+      <Link>Content\Text\player_names_text.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\Team6.UWP\Content\Animations\chicken_anim.json">
+      <Link>Content\Animations\chicken_anim.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\Team6.UWP\Content\Audio\chickenScared1.json">
+      <Link>Content\Audio\chickenScared1.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\Team6.UWP\Content\Audio\chickenScared2.json">
+      <Link>Content\Audio\chickenScared2.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\Team6.UWP\Content\Audio\chickenScared3.json">
+      <Link>Content\Audio\chickenScared3.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\Team6.UWP\Content\Audio\countDownLong.json">
+      <Link>Content\Audio\countDownLong.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\Team6.UWP\Content\Audio\countDownShort.json">
+      <Link>Content\Audio\countDownShort.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\Team6.UWP\Content\Audio\dashSwoosh.json">
+      <Link>Content\Audio\dashSwoosh.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\Team6.UWP\Content\Audio\Dizzy.json">
+      <Link>Content\Audio\Dizzy.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\Team6.UWP\Content\Audio\Hit1.json">
+      <Link>Content\Audio\Hit1.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\Team6.UWP\Content\Audio\Hit2.json">
+      <Link>Content\Audio\Hit2.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\Team6.UWP\Content\Audio\Hit3.json">
+      <Link>Content\Audio\Hit3.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\Team6.UWP\Content\Audio\Lure.json">
+      <Link>Content\Audio\Lure.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\Team6.UWP\Content\Audio\MenuActionSound.json">
+      <Link>Content\Audio\MenuActionSound.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\Team6.UWP\Content\Audio\PigHappy.json">
+      <Link>Content\Audio\PigHappy.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\Team6.UWP\Content\Audio\PigScared1.json">
+      <Link>Content\Audio\PigScared1.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\Team6.UWP\Content\Audio\PigScared2.json">
+      <Link>Content\Audio\PigScared2.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\Team6.UWP\Content\Audio\PigScared3.json">
+      <Link>Content\Audio\PigScared3.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\Team6.UWP\Content\Audio\PigScared4.json">
+      <Link>Content\Audio\PigScared4.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="app.manifest" />
+    <MonoGameContentReference Include="Content\Content.mgcb" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

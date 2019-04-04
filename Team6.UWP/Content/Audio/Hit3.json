@@ -1,0 +1,8 @@
+{
+  "MinPitchShift": 0,
+  "MaxPitchShift": 0,
+  "MinVolume": 0.3,
+  "MaxVolume": 0.3,
+  "InstanceLimit": 5,
+  "MinimumTimeBetween": 0
+}
