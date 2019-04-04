@@ -1,3 +1,9 @@
+Vacamole is a local multiplayer game for up to 4 people.
+
+All the cattle escaped into the jungle and the sun is setting down. Make sure to bring them all back in time but beware of the other farmers that might want to claim them for themselves!
+
+So hop on your couch with your friends and show them who's the best farmer.
+
 # Setup
 
 ## Linux
