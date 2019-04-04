@@ -23,8 +23,6 @@ namespace Team6.Game.Entities
         private FleeingBehavior<BoarState> fleeingBehaviour;
         private HitBehavior<BoarState> hitBehaviour;
 
-        private UnstuckBehavior<BoarState> unstuckBehavior;
-
         public BoarEntity(Scene scene, Vector2 location, float rotation = 0) : base(scene, location, CreateType(scene.Game.Content), rotation)
         {
 
