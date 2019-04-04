@@ -171,6 +171,7 @@
     <Compile Include="Game\Components\AIBehaviors\FollowingBehavior.cs" />
     <Compile Include="Game\Components\AIBehaviors\FleeingBehavior.cs" />
     <Compile Include="Game\Components\AIBehaviors\ObstacleAvoidanceBehaviour.cs" />
+    <Compile Include="Game\Components\AIBehaviors\UnstuckBehavior.cs" />
     <Compile Include="Game\Components\AIBehaviors\WanderingBehavior.cs" />
     <Compile Include="Game\Components\MovementBasicsComponent.cs" />
     <Compile Include="Game\Components\PlayerControllerComponent.cs" />

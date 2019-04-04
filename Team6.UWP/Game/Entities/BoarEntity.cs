@@ -18,10 +18,12 @@ namespace Team6.Game.Entities
 {
     public class BoarEntity : AnimalEntity<BoarState>
     {
-        
+
         private FollowingBehavior<BoarState> followingBehaviour;
         private FleeingBehavior<BoarState> fleeingBehaviour;
         private HitBehavior<BoarState> hitBehaviour;
+
+        private UnstuckBehavior<BoarState> unstuckBehavior;
 
         public BoarEntity(Scene scene, Vector2 location, float rotation = 0) : base(scene, location, CreateType(scene.Game.Content), rotation)
         {
@@ -41,7 +43,7 @@ namespace Team6.Game.Entities
 
         private void FleeingTrigger(BoarState currentState, Entity entity, float elapsedSeconds, float totalElapsedSeconds)
         {
-            // Only allow fleeing if the animal is not in folloing mode but when it is, only has a distance of smaller than 1 meters
+            // Only allow fleeing if the animal is not in following mode but when it is, only has a distance of smaller than 1 meters
             if (hearingSensor.SensedEntities.Any() &&
                 (aiComponent.CurrentState != BoarState.Following || (followingBehaviour.EntityToFollow.Body.Position - Body.Position).Length() > 1f))
             {
@@ -118,6 +120,7 @@ namespace Team6.Game.Entities
                     Speed = 0.5f
                 })
                 .WithBehaviour(() => new ObstacleAvoidanceBehaviour<BoarState>(EnumExt.GetValues<BoarState>(), new OutgoingState<BoarState>[0]) { Weight = 10f })
+                .WithBehaviour(() => new UnstuckBehavior<BoarState>(EnumExt.GetValues<BoarState>(), new OutgoingState<BoarState>[0]))
                 .DefaultAnimation("walking").StateToAnimation(BoarState.Rootling, "neutral").StateToAnimation(BoarState.BeingHit, "hit");
         }
     }
