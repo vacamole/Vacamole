@@ -44,9 +44,6 @@ namespace Team6.Game.Components
 
         private Vector2 dashDirection;
 
-        // Easter Eggs
-        private bool easterEggButtonPressed = false;
-        private float easterEggButtonPressedForSeconds = 0;
 
         private Vector2 dashCollisionPoint;
         private Vector2 dashCollisionDirection;
@@ -59,32 +56,26 @@ namespace Team6.Game.Components
             {
                 Mappings.Add(new InputMapping(null, MovementFromKeyboard));
 
-                Mappings.Add(new InputMapping(InputFunctions.KeyboardDash, f => StartDash()));
+                Mappings.Add(new InputMapping(f => InputFunctions.KeyboardDash(f), f => StartDash()));
 
-                Mappings.Add(new InputMapping(InputFunctions.KeyboardStartShout, f => SwitchState(PlayerState.Shouting)));
-                Mappings.Add(new InputMapping(InputFunctions.KeyboardEndShout, f => SwitchState(PlayerState.Walking)));
+                Mappings.Add(new InputMapping(f => InputFunctions.KeyboardStartShout(f), f => SwitchState(PlayerState.Shouting)));
+                Mappings.Add(new InputMapping(f => InputFunctions.KeyboardEndShout(f), f => SwitchState(PlayerState.Walking)));
 
-                Mappings.Add(new InputMapping(InputFunctions.KeyboardStartLure, f => SwitchState(PlayerState.Luring)));
-                Mappings.Add(new InputMapping(InputFunctions.KeyboardEndLure, f => SwitchState(PlayerState.Walking)));
+                Mappings.Add(new InputMapping(f => InputFunctions.KeyboardStartLure(f), f => SwitchState(PlayerState.Luring)));
+                Mappings.Add(new InputMapping(f => InputFunctions.KeyboardEndLure(f), f => SwitchState(PlayerState.Walking)));
             }
             else
             {
                 Mappings.Add(new InputMapping(null, MovementFromGamepad));
 
-                Mappings.Add(new InputMapping(InputFunctions.Dash, f => StartDash()));
+                Mappings.Add(new InputMapping(f => InputFunctions.Dash(f), f => StartDash()));
 
-                Mappings.Add(new InputMapping(f => f.IsJustPressed(Buttons.X), f => easterEggButtonPressed = true));
-                Mappings.Add(new InputMapping(f => f.IsJustReleased(Buttons.X), f =>
-                {
-                    if (easterEggButtonPressedForSeconds > 10f)
-                        Entity.Scene.World.Gravity = new Vector2(0, 9.81f);
-                }));
 
-                Mappings.Add(new InputMapping(InputFunctions.StartShout, f => SwitchState(PlayerState.Shouting)));
-                Mappings.Add(new InputMapping(InputFunctions.EndShout, f => SwitchState(PlayerState.Walking)));
+                Mappings.Add(new InputMapping(f => InputFunctions.StartShout(f), f => SwitchState(PlayerState.Shouting)));
+                Mappings.Add(new InputMapping(f => InputFunctions.EndShout(f), f => SwitchState(PlayerState.Walking)));
 
-                Mappings.Add(new InputMapping(InputFunctions.StartLure, f => SwitchState(PlayerState.Luring)));
-                Mappings.Add(new InputMapping(InputFunctions.EndLure, f => SwitchState(PlayerState.Walking)));
+                Mappings.Add(new InputMapping(f => InputFunctions.StartLure(f), f => SwitchState(PlayerState.Luring)));
+                Mappings.Add(new InputMapping(f => InputFunctions.EndLure(f), f => SwitchState(PlayerState.Walking)));
             }
         }
 
@@ -267,10 +258,6 @@ namespace Team6.Game.Components
                 else
                     animationComponent.SwitchTo("standing");
             }
-
-            // Easter Egg (increment button is pressed)
-            if (easterEggButtonPressed)
-                easterEggButtonPressedForSeconds += elapsedSeconds;
         }
 
         // this is just a wrapper around playerEntity.SwitchToState(..), but it prevents switching away from dizzy
