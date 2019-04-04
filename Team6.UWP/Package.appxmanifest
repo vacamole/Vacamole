@@ -3,7 +3,7 @@
   <Identity Name="1d54724a-3a73-4865-8ac4-eff259eca4be" Publisher="CN=Vacamole" Version="0.1.8.0" />
   <mp:PhoneIdentity PhoneProductId="1d54724a-3a73-4865-8ac4-eff259eca4be" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>Team6.UWP</DisplayName>
+    <DisplayName>Vacamole.UWP</DisplayName>
     <PublisherDisplayName>Vacamole</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
