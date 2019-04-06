@@ -67,7 +67,7 @@ namespace Team6.Game.Entities
         private void FleeingTrigger(ChickenState currentState, Entity entity, float elapsedSeconds, float totalElapsedSeconds)
         {
             // Only allow fleeing if the animal is not in folloing mode but when it is, only has a distance of smaller than 1 meters
-            if (hearingSensor.SensedEntities.Any() && 
+            if (hearingSensor.SensedEntities.Any() &&
                 (aiComponent.CurrentState != ChickenState.Following || (followingBehaviour.EntityToFollow.Body.Position - Body.Position).Length() > 1f))
             {
                 fleeingBehaviour.FleeingPoint = hearingSensor.SensedEntities.Average(e => e.Body.Position);
@@ -78,7 +78,7 @@ namespace Team6.Game.Entities
                     this.Scene.Dispatcher.Delay(delay,
                         () => GetComponent<AudioSourceComponent>().PlaySound($"Audio/chickenScared{randI}"));
                 }
-                
+
                 aiComponent.ChangeState(ChickenState.Fleeing);
             }
         }
@@ -100,7 +100,7 @@ namespace Team6.Game.Entities
             {
                 Entity player = playerProximitySensor.SensedEntities.OrderBy(e => (e.Body.Position - this.Body.Position).LengthSquared()).First();
                 playerFleeingBehavior.FleeingPoint = player.Body.Position;
-                
+
                 aiComponent.ChangeState(ChickenState.AvoidingPlayer);
             }
         }
@@ -120,7 +120,7 @@ namespace Team6.Game.Entities
             var asset = content.LoadFromJson<AnimationDefintion>("Animations/chicken_anim");
             float size = RandomExt.GetRandomFloat(0.9f, 1.2f);
 
-            if (RandomExt.GetRandomFloat(0,1) < 0.35f)
+            if (RandomExt.GetRandomFloat(0, 1) < 0.35f)
             {
                 asset.AssetName = "chicken_walk-spritesheet_8x4_a512_orange";
                 size = RandomExt.GetRandomFloat(0.5f, 0.7f);
@@ -172,6 +172,7 @@ namespace Team6.Game.Entities
                     Speed = 3f
                 })
                 .WithBehaviour(() => new VelocityMatchBehavior<ChickenState>(EnumExt.GetValues<ChickenState>(), new OutgoingState<ChickenState>[0]) { Weight = 2f })
+                .WithBehaviour(() => new UnstuckBehavior<ChickenState>(EnumExt.GetValues<ChickenState>(), new OutgoingState<ChickenState>[0]) { Weight = 0.25f })
                 .DefaultAnimation("walking").StateToAnimation(ChickenState.Picking, "eating").StateToAnimation(ChickenState.AvoidingPlayer, "flapping")
                 .StateToAnimation(ChickenState.Fleeing, "flapping");
         }

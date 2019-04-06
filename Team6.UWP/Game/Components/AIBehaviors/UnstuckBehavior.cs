@@ -43,7 +43,8 @@ namespace Team6.Game.Components.AIBehaviors
             {
                 if (obstacleSensor.SensedEntity != null && obstacleSensor.SensedEntity.Body.BodyType == FarseerPhysics.Dynamics.BodyType.Static)
                 {
-                    Entity.Body.ApplyLinearImpulse(RandomExt.GetRandomVector(10, 20));
+                    Entity.Body.ApplyLinearImpulse(RandomExt.GetRandomVector(10, 30) * Weight);
+                    Entity.Body.ApplyAngularImpulse(RandomExt.GetRandomFloat(100, 300) * Weight);
                 }
             }
         }
