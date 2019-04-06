@@ -97,7 +97,7 @@ namespace Team6.Game.Scenes
             {
                 MaintainAspectRation = false,
                 OnVirtualUIScreen = false,
-                Color = Color.FromNonPremultiplied(0, 0, 0, 120),
+                Color = Color.FromNonPremultiplied(0, 0, 0, 160),
                 Opacity = 0
             };
             controlInstructions = new HUDComponent("controls", new Vector2(0.85f, 0.4f), origin: new Vector2(0.5f, 0.5f)) { Opacity = 0, MaintainAspectRation = true };
@@ -119,16 +119,28 @@ namespace Team6.Game.Scenes
             AddEntity(layerIndependent);
 
             creditsScene = new[] {
-                new HUDTextComponent(MainFont, 0.2f, "Credits",
+                new HUDTextComponent(MainFont, 0.03f, "Credits",
+                offset: new Vector2(0.5f, 0.1f),
+                origin: new Vector2(0.5f, 0.5f))
+                { Opacity = 0 },
+                new HUDTextComponent(MainFont, 0.04f, "Programming",
                 offset: new Vector2(0.5f, 0.25f),
                 origin: new Vector2(0.5f, 0.5f))
                 { Opacity = 0 },
-                new HUDTextComponent(MainFont, 0.1f, "Programming",
+                new HUDTextComponent(MainFont, 0.06f, "Alexander Kayed\nMoritz Zilian\nFlorian Zinggeler",
                 offset: new Vector2(0.5f, 0.4f),
                 origin: new Vector2(0.5f, 0.5f))
                 { Opacity = 0 },
-                new HUDTextComponent(MainFont, 0.05f, "Alexander Kayed\nFlorian Zinggeler\nMoritz Zilian",
+                new HUDTextComponent(MainFont, 0.04f, "Art",
                 offset: new Vector2(0.5f, 0.6f),
+                origin: new Vector2(0.5f, 0.5f))
+                { Opacity = 0 },
+                new HUDTextComponent(MainFont, 0.06f, "Sonja Böckler",
+                offset: new Vector2(0.5f, 0.675f),
+                origin: new Vector2(0.5f, 0.5f))
+                { Opacity = 0 },
+                new HUDTextComponent(MainFont, 0.035f, "This game was created during the\nETH Game Programming Laboratory course\nin collaboration with ZHdK",
+                offset: new Vector2(0.5f, 0.85f),
                 origin: new Vector2(0.5f, 0.5f))
                 { Opacity = 0 },
             };
@@ -220,7 +232,11 @@ namespace Team6.Game.Scenes
                     break;
                 case MenuState.Credits:
                     isCreditsEnabled = false;
-                    Dispatcher.AddAnimation(Animation.Get(1, 0, duration, false, val => creditsScene.ForEach(c => c.Opacity = val), EasingFunctions.QuadIn));
+                    Dispatcher.AddAnimation(Animation.Get(1, 0, duration, false, val =>
+                        {
+                            controlInstructionsBackground.Opacity = val;
+                            creditsScene.ForEach(c => c.Opacity = val);
+                        }, EasingFunctions.QuadIn));
                     break;
                 default:
                     delay = 0f;
@@ -245,7 +261,11 @@ namespace Team6.Game.Scenes
                         .Then(() => isControlInstructionsEnabled = true);
                     break;
                 case MenuState.Credits:
-                    Dispatcher.AddAnimation(Animation.Get(0, 1, duration, false, val => creditsScene.ForEach(c => c.Opacity = val), EasingFunctions.QuadIn))
+                    Dispatcher.AddAnimation(Animation.Get(0, 1, duration, false, val =>
+                        {
+                            controlInstructionsBackground.Opacity = val;
+                            creditsScene.ForEach(c => c.Opacity = val);
+                        }, EasingFunctions.QuadIn))
                         .Then(() => isCreditsEnabled = true);
                     break;
                 default:
