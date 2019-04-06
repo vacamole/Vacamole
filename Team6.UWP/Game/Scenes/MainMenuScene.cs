@@ -77,6 +77,7 @@ namespace Team6.Game.Scenes
                 new HUDListEntity.ListEntry("New Game", OnNewGame),
                 new HUDListEntity.ListEntry("Options", (i) => GoToMenuState(MenuState.Options)),
                 new HUDListEntity.ListEntry("Controls", (i) => GoToMenuState(MenuState.Controls)),
+                new HUDListEntity.ListEntry("Tutorial", OnGoToTutorial),
                 new HUDListEntity.ListEntry("Exit", OnExit)
             })
             { Enabled = false, Opacity = 0 };
@@ -229,7 +230,19 @@ namespace Team6.Game.Scenes
 
         private void OnNewGame(HUDListEntity.ListEntry item)
         {
-            this.TransitionOutAndSwitchScene(new GameModeScene(Game));
+            if (Settings<GameSettings>.Value.ShowTutorial)
+            {
+                this.TransitionOutAndSwitchScene(new TutorialScene(Game, false));
+            }
+            else
+            {
+                this.TransitionOutAndSwitchScene(new GameModeScene(Game));
+            }
+        }
+
+        private void OnGoToTutorial(HUDListEntity.ListEntry obj)
+        {
+            this.TransitionOutAndSwitchScene(new TutorialScene(Game, true));
         }
 
         public override void OnShown()

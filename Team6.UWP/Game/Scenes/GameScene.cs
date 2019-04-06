@@ -37,9 +37,10 @@ namespace Team6.Game.Scenes
         protected const float centerX = screenWidth / 2.0f;
         protected const float centerY = screenHeight / 2.0f;
         protected readonly Color countdownColor = new Color(139, 112, 57);
+        private readonly bool spawnAnyUI;
         protected float gameDuration = 120f;
 
-        private List<PlayerEntity> playerEntities = new List<PlayerEntity>();
+        protected List<PlayerEntity> playerEntities = new List<PlayerEntity>();
 
         private HUDTextComponent timeComponent100;
         private HUDTextComponent timeComponent10;
@@ -59,10 +60,11 @@ namespace Team6.Game.Scenes
         private HUDTextComponent separatorTeam1Component;
         private HUDTextComponent separatorTeam2Component;
 
-        public GameScene(MainGame game, bool isCountdownRunning) : base(game)
+        public GameScene(MainGame game, bool isCountdownRunning, bool spawnAnyUI = true) : base(game)
         {
-            if (isCountdownRunning)
+            if (isCountdownRunning && spawnAnyUI)
                 StartCountown();
+            this.spawnAnyUI = spawnAnyUI;
         }
 
         public override void LoadContent()
@@ -97,98 +99,100 @@ namespace Team6.Game.Scenes
 
             // HUD
             // src image 1365x460
-            timeComponentBackground = new HUDComponent("timer_bg", new Vector2(1.365f / 0.46f * 0.1f, 1f * 0.1f), new Vector2(0.5f, 0f));
-
-            this.timeComponent100 = new HUDTextComponent(MainFont, 0.07f, "", color: countdownColor,
-                offset: timeComponentBackground.LocalPointToWorldPoint(new Vector2(0.35f, 0.5f)),
-                origin: new Vector2(0.5f, 0.5f)
-            );
-            this.timeComponent10 = new HUDTextComponent(MainFont, 0.07f, "", color: countdownColor,
-                offset: timeComponentBackground.LocalPointToWorldPoint(new Vector2(0.425f, 0.5f)),
-                origin: new Vector2(0.5f, 0.5f)
-            );
-            this.timeComponent1 = new HUDTextComponent(MainFont, 0.07f, "", color: countdownColor,
-                offset: timeComponentBackground.LocalPointToWorldPoint(new Vector2(0.5f, 0.5f)),
-                origin: new Vector2(0.5f, 0.5f)
-            );
-            AddEntity(new Entity(this, EntityType.UI, new Vector2(0.5f, 0f),
-                timeComponentBackground, timeComponent100, timeComponent10, timeComponent1
-            ));
-
-            if (!IsCountdownRunning)
+            if (spawnAnyUI)
             {
-                timeComponentBackground.Opacity =
-                    timeComponent100.Opacity =
-                    timeComponent10.Opacity =
-                    timeComponent1.Opacity = 0f;
-            }
+                timeComponentBackground = new HUDComponent("timer_bg", new Vector2(1.365f / 0.46f * 0.1f, 1f * 0.1f), new Vector2(0.5f, 0f));
 
-            UpdateCountdown(0);
+                this.timeComponent100 = new HUDTextComponent(MainFont, 0.07f, "", color: countdownColor,
+                    offset: timeComponentBackground.LocalPointToWorldPoint(new Vector2(0.35f, 0.5f)),
+                    origin: new Vector2(0.5f, 0.5f)
+                );
+                this.timeComponent10 = new HUDTextComponent(MainFont, 0.07f, "", color: countdownColor,
+                    offset: timeComponentBackground.LocalPointToWorldPoint(new Vector2(0.425f, 0.5f)),
+                    origin: new Vector2(0.5f, 0.5f)
+                );
+                this.timeComponent1 = new HUDTextComponent(MainFont, 0.07f, "", color: countdownColor,
+                    offset: timeComponentBackground.LocalPointToWorldPoint(new Vector2(0.5f, 0.5f)),
+                    origin: new Vector2(0.5f, 0.5f)
+                );
+                AddEntity(new Entity(this, EntityType.UI, new Vector2(0.5f, 0f),
+                    timeComponentBackground, timeComponent100, timeComponent10, timeComponent1
+                ));
 
-            // Camera director
-            AddEntity(new Entity(this, EntityType.LayerIndependent, new CameraDirectorComponent(playerEntities, Game.Camera)));
+                if (!IsCountdownRunning)
+                {
+                    timeComponentBackground.Opacity =
+                        timeComponent100.Opacity =
+                        timeComponent10.Opacity =
+                        timeComponent1.Opacity = 0f;
+                }
 
-            // Add pause overlay
-            AddEntity(new Entity(this, EntityType.UI, pauseOverlayComponents.AddAndReturn(new HUDComponent(Game.Debug.DebugRectangle, Vector2.One, layerDepth: 0.99f)
-            {
-                Color = Color.Black,
-                MaintainAspectRation = false,
-                OnVirtualUIScreen = false,
-            })));
+                UpdateCountdown(0);
 
-            AddEntity(new Entity(this, EntityType.UI, new Vector2(0.5f, 0.25f),
+                // Add pause overlay
+                AddEntity(new Entity(this, EntityType.UI, pauseOverlayComponents.AddAndReturn(new HUDComponent(Game.Debug.DebugRectangle, Vector2.One, layerDepth: 0.99f)
+                {
+                    Color = Color.Black,
+                    MaintainAspectRation = false,
+                    OnVirtualUIScreen = false,
+                })));
+
+                AddEntity(new Entity(this, EntityType.UI, new Vector2(0.5f, 0.25f),
                 pauseTextOverlayComponents.AddAndReturn(new HUDTextComponent(MainFont, 0.2f, "Game Paused", origin: new Vector2(0.5f, 0.5f), layerDepth: 1f))));
 
-            pauseTextOverlayComponents.AddRange(
-                AddEntity(pauseMenuList = new HUDListEntity(this, new Vector2(0.5f, 0.5f), layerDepth: 1f,
-                menuEntries: new[] { new HUDListEntity.ListEntry("Resume", TogglePause), new HUDListEntity.ListEntry("Rejoin", BackToJoinScreen)
-                ,new HUDListEntity.ListEntry("Back to main menu", BackToMainMenu)})
+                pauseTextOverlayComponents.AddRange(
+                 AddEntity(pauseMenuList = new HUDListEntity(this, new Vector2(0.5f, 0.5f), layerDepth: 1f,
+                 menuEntries: new[] { new HUDListEntity.ListEntry("Resume", TogglePause), new HUDListEntity.ListEntry("Rejoin", BackToJoinScreen)
+                    ,new HUDListEntity.ListEntry("Back to main menu", BackToMainMenu)})
+                 {
+                     Enabled = false
+                 })
+                 .GetAllComponents<HUDTextComponent>().ToList());
+
+                // make overlay invisible
+                // [FOREACH PERFORMANCE] Should not allocate garbage
+                pauseOverlayComponents.ForEach(c => c.Opacity = 0f);
+                // [FOREACH PERFORMANCE] Should not allocate garbage
+                pauseTextOverlayComponents.ForEach(c => c.Opacity = 0f);
+
+                // Add pause controls
+                // [FOREACH PERFORMANCE] Should not allocate garbage
+                foreach (var playerInfo in Game.CurrentGameMode.PlayerInfos)
                 {
-                    Enabled = false
-                })
-                .GetAllComponents<HUDTextComponent>().ToList());
+                    if (playerInfo.IsKeyboardPlayer)
+                        AddEntity(new Entity(this, EntityType.LayerIndependent, new InputComponent(new InputMapping(i => InputFunctions.KeyboardPause(i), (f) => TogglePause(null)))));
+                    else
+                        AddEntity(new Entity(this, EntityType.LayerIndependent, new InputComponent(playerInfo.GamepadIndex,
+                            new InputMapping(i => InputFunctions.Pause(i), (f) => TogglePause(null)),
+                            new InputMapping(i => InputFunctions.StartCountdown(i), (f) => StartCountown())
+                            )));
+                }
 
-            // make overlay invisible
-            // [FOREACH PERFORMANCE] Should not allocate garbage
-            pauseOverlayComponents.ForEach(c => c.Opacity = 0f);
-            // [FOREACH PERFORMANCE] Should not allocate garbage
-            pauseTextOverlayComponents.ForEach(c => c.Opacity = 0f);
+                var playerInfos = Game.CurrentGameMode.PlayerInfos;
+                var colors = ((PlayerColors[])Enum.GetValues(typeof(PlayerColors)));
 
-            // Add pause controls
-            // [FOREACH PERFORMANCE] Should not allocate garbage
-            foreach (var playerInfo in Game.CurrentGameMode.PlayerInfos)
-            {
-                if (playerInfo.IsKeyboardPlayer)
-                    AddEntity(new Entity(this, EntityType.LayerIndependent, new InputComponent(new InputMapping(i => InputFunctions.KeyboardPause(i), (f) => TogglePause(null)))));
-                else
-                    AddEntity(new Entity(this, EntityType.LayerIndependent, new InputComponent(playerInfo.GamepadIndex,
-                        new InputMapping(i => InputFunctions.Pause(i), (f) => TogglePause(null)),
-                        new InputMapping(i => InputFunctions.StartCountdown(i), (f) => StartCountown())
-                        )));
+                initialCountdownComponent = new HUDTextComponent(MainFont, 0.25f, Game.CurrentGameMode.PlayerMode == PlayerMode.TwoVsTwo ? "vs" : "free4all", origin: new Vector2(0.5f, 0.5f));
+                playerName1Component = new HUDTextComponent(MainFont, 0.15f, playerInfos[0].Name, color: colors[0].GetColor(), origin: new Vector2(0f, 0.5f), offset: new Vector2(-0.25f, -0.25f));
+                playerName2Component = new HUDTextComponent(MainFont, 0.15f, playerInfos.Count > 1 ? playerInfos[1].Name : "name2", color: colors[1].GetColor(), origin: new Vector2(0f, 0.5f), offset: new Vector2(-0.25f, 0.25f));
+                playerName3Component = new HUDTextComponent(MainFont, 0.15f, playerInfos.Count > 2 ? playerInfos[2].Name : "name3", color: colors[2].GetColor(), origin: new Vector2(1f, 0.5f), offset: new Vector2(0.25f, -0.25f));
+                playerName4Component = new HUDTextComponent(MainFont, 0.15f, playerInfos.Count > 3 ? playerInfos[3].Name : "name4", color: colors[3].GetColor(), origin: new Vector2(1f, 0.5f), offset: new Vector2(0.25f, 0.25f));
+                separatorTeam1Component = new HUDTextComponent(MainFont, 0.15f, "&", origin: new Vector2(0.5f, 0.5f), offset: new Vector2(0f, -0.25f));
+                separatorTeam2Component = new HUDTextComponent(MainFont, 0.15f, "&", origin: new Vector2(0.5f, 0.5f), offset: new Vector2(0f, 0.25f));
+                Entity countdownEntity;
+                AddEntity(countdownEntity = new Entity(this, EntityType.UI, new Vector2(0.5f, 0.5f), initialCountdownComponent));
+
+                if (Game.CurrentGameMode.PlayerMode == PlayerMode.TwoVsTwo)
+                {
+                    countdownEntity.AddComponent(playerName1Component);
+                    countdownEntity.AddComponent(playerName2Component);
+                    countdownEntity.AddComponent(playerName3Component);
+                    countdownEntity.AddComponent(playerName4Component);
+                    countdownEntity.AddComponent(separatorTeam1Component);
+                    countdownEntity.AddComponent(separatorTeam2Component);
+                }
             }
-
-            var playerInfos = Game.CurrentGameMode.PlayerInfos;
-            var colors = ((PlayerColors[])Enum.GetValues(typeof(PlayerColors)));
-
-            initialCountdownComponent = new HUDTextComponent(MainFont, 0.25f, Game.CurrentGameMode.PlayerMode == PlayerMode.TwoVsTwo ? "vs" : "free4all", origin: new Vector2(0.5f, 0.5f));
-            playerName1Component = new HUDTextComponent(MainFont, 0.15f, playerInfos[0].Name, color: colors[0].GetColor(), origin: new Vector2(0f, 0.5f), offset: new Vector2(-0.25f, -0.25f));
-            playerName2Component = new HUDTextComponent(MainFont, 0.15f, playerInfos.Count > 1 ? playerInfos[1].Name : "name2", color: colors[1].GetColor(), origin: new Vector2(0f, 0.5f), offset: new Vector2(-0.25f, 0.25f));
-            playerName3Component = new HUDTextComponent(MainFont, 0.15f, playerInfos.Count > 2 ? playerInfos[2].Name : "name3", color: colors[2].GetColor(), origin: new Vector2(1f, 0.5f), offset: new Vector2(0.25f, -0.25f));
-            playerName4Component = new HUDTextComponent(MainFont, 0.15f, playerInfos.Count > 3 ? playerInfos[3].Name : "name4", color: colors[3].GetColor(), origin: new Vector2(1f, 0.5f), offset: new Vector2(0.25f, 0.25f));
-            separatorTeam1Component = new HUDTextComponent(MainFont, 0.15f, "&", origin: new Vector2(0.5f, 0.5f), offset: new Vector2(0f, -0.25f));
-            separatorTeam2Component = new HUDTextComponent(MainFont, 0.15f, "&", origin: new Vector2(0.5f, 0.5f), offset: new Vector2(0f, 0.25f));
-            Entity countdownEntity;
-            AddEntity(countdownEntity = new Entity(this, EntityType.UI, new Vector2(0.5f, 0.5f), initialCountdownComponent));
-
-            if (Game.CurrentGameMode.PlayerMode == PlayerMode.TwoVsTwo)
-            {
-                countdownEntity.AddComponent(playerName1Component);
-                countdownEntity.AddComponent(playerName2Component);
-                countdownEntity.AddComponent(playerName3Component);
-                countdownEntity.AddComponent(playerName4Component);
-                countdownEntity.AddComponent(separatorTeam1Component);
-                countdownEntity.AddComponent(separatorTeam2Component);
-            }
+            // Camera director
+            AddEntity(new Entity(this, EntityType.LayerIndependent, new CameraDirectorComponent(playerEntities, Game.Camera)));
         }
 
         public override void Initialize()
@@ -206,41 +210,44 @@ namespace Team6.Game.Scenes
                 };
             };
 
-            Dispatcher.Delay(2f, () =>
+            if (spawnAnyUI)
             {
-                Dispatcher.AddAnimation(Animation.Get(1f, 0f, 1f, false,
-                        (v) => playerName1Component.Opacity = v,
-                        EasingFunctions.ToEaseOut(EasingFunctions.QuadIn), 0.5f));
-                Dispatcher.AddAnimation(Animation.Get(1f, 0f, 1f, false,
-                        (v) => playerName2Component.Opacity = v,
-                        EasingFunctions.ToEaseOut(EasingFunctions.QuadIn), 0.5f));
-                Dispatcher.AddAnimation(Animation.Get(1f, 0f, 1f, false,
-                        (v) => playerName3Component.Opacity = v,
-                        EasingFunctions.ToEaseOut(EasingFunctions.QuadIn), 0.5f));
-                Dispatcher.AddAnimation(Animation.Get(1f, 0f, 1f, false,
-                        (v) => playerName4Component.Opacity = v,
-                        EasingFunctions.ToEaseOut(EasingFunctions.QuadIn), 0.5f));
-                Dispatcher.AddAnimation(Animation.Get(1f, 0f, 1f, false,
-                        (v) => separatorTeam1Component.Opacity = v,
-                        EasingFunctions.ToEaseOut(EasingFunctions.QuadIn), 0.5f));
-                Dispatcher.AddAnimation(Animation.Get(1f, 0f, 1f, false,
-                        (v) => separatorTeam2Component.Opacity = v,
-                        EasingFunctions.ToEaseOut(EasingFunctions.QuadIn), 0.5f));
+                Dispatcher.Delay(2f, () =>
+                {
+                    Dispatcher.AddAnimation(Animation.Get(1f, 0f, 1f, false,
+                            (v) => playerName1Component.Opacity = v,
+                            EasingFunctions.ToEaseOut(EasingFunctions.QuadIn), 0.5f));
+                    Dispatcher.AddAnimation(Animation.Get(1f, 0f, 1f, false,
+                            (v) => playerName2Component.Opacity = v,
+                            EasingFunctions.ToEaseOut(EasingFunctions.QuadIn), 0.5f));
+                    Dispatcher.AddAnimation(Animation.Get(1f, 0f, 1f, false,
+                            (v) => playerName3Component.Opacity = v,
+                            EasingFunctions.ToEaseOut(EasingFunctions.QuadIn), 0.5f));
+                    Dispatcher.AddAnimation(Animation.Get(1f, 0f, 1f, false,
+                            (v) => playerName4Component.Opacity = v,
+                            EasingFunctions.ToEaseOut(EasingFunctions.QuadIn), 0.5f));
+                    Dispatcher.AddAnimation(Animation.Get(1f, 0f, 1f, false,
+                            (v) => separatorTeam1Component.Opacity = v,
+                            EasingFunctions.ToEaseOut(EasingFunctions.QuadIn), 0.5f));
+                    Dispatcher.AddAnimation(Animation.Get(1f, 0f, 1f, false,
+                            (v) => separatorTeam2Component.Opacity = v,
+                            EasingFunctions.ToEaseOut(EasingFunctions.QuadIn), 0.5f));
 
-            }).ThenDelay(0.9f, makeCountDown(3))
-            .ThenDelay(0.9f, makeCountDown(2))
-            .ThenDelay(0.9f, makeCountDown(1))
-            .ThenDelay(0.9f, () =>
-            {
-                NonPositionalAudio.PlaySound("Audio/countDownLong");
-                initialCountdownComponent.Text = "GO!";
-                Unpause();
-                Dispatcher.AddAnimation(Animation.Get(1f, 0f, 1f, false,
-                    (v) => initialCountdownComponent.Opacity = v,
-                    EasingFunctions.ToEaseOut(EasingFunctions.QuadIn), 0.5f));
-                if (IsCountdownRunning)
-                    StartCountown();
-            });
+                }).ThenDelay(0.9f, makeCountDown(3))
+                .ThenDelay(0.9f, makeCountDown(2))
+                .ThenDelay(0.9f, makeCountDown(1))
+                .ThenDelay(0.9f, () =>
+                {
+                    NonPositionalAudio.PlaySound("Audio/countDownLong");
+                    initialCountdownComponent.Text = "GO!";
+                    Unpause();
+                    Dispatcher.AddAnimation(Animation.Get(1f, 0f, 1f, false,
+                        (v) => initialCountdownComponent.Opacity = v,
+                        EasingFunctions.ToEaseOut(EasingFunctions.QuadIn), 0.5f));
+                    if (IsCountdownRunning)
+                        StartCountown();
+                });
+            }
         }
 
         public void StartCountown()

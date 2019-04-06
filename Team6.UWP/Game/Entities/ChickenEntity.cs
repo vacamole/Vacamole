@@ -30,7 +30,7 @@ namespace Team6.Game.Entities
         private SensorComponent proximitySensor;
         private SensorComponent playerProximitySensor;
 
-        public ChickenEntity(Scene scene, Vector2 location, float rotation = 0) : base(scene, location, CreateType(scene.Game.Content), rotation)
+        public ChickenEntity(Scene scene, Vector2 location, float rotation = 0, int chickenType = -1) : base(scene, location, CreateType(scene.Game.Content, chickenType), rotation)
         {
             AddComponent(proximitySensor = new SensorComponent(
                 "proximity",
@@ -111,7 +111,7 @@ namespace Team6.Game.Entities
             aiComponent.ChangeState(ChickenState.AvoidingPlayer);
         }
 
-        private static AnimalType<ChickenState> CreateType(ContentManager content)
+        private static AnimalType<ChickenState> CreateType(ContentManager content, int chickenType)
         {
             float baseSpeed = 2f;
             float slowSpeed = 0f;
@@ -120,7 +120,7 @@ namespace Team6.Game.Entities
             var asset = content.LoadFromJson<AnimationDefintion>("Animations/chicken_anim");
             float size = RandomExt.GetRandomFloat(0.9f, 1.2f);
 
-            if (RandomExt.GetRandomFloat(0,1) < 0.35f)
+            if (chickenType == -1 && RandomExt.GetRandomFloat(0,1) < 0.35f || chickenType == 1)
             {
                 asset.AssetName = "chicken_walk-spritesheet_8x4_a512_orange";
                 size = RandomExt.GetRandomFloat(0.5f, 0.7f);

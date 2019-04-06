@@ -348,6 +348,9 @@
     <Compile Include="..\Team6.UWP\Game\Scenes\WinScene.cs">
       <Link>Game\Scene\WinScene.cs</Link>
     </Compile>
+    <Compile Include="..\Team6.UWP\Game\Scenes\TutorialScene.cs">
+      <Link>Game\Scene\TutorialScene.cs</Link>
+    </Compile>
     <Compile Include="..\Team6.UWP\MainGame.cs">
       <Link>MainGame.cs</Link>
     </Compile>
