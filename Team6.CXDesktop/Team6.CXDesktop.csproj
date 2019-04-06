@@ -426,6 +426,12 @@
       <Link>MonoGame.Framework.dll.config</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Content Include="README.md">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Vacamole">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="..\Team6.UWP\Content\Animations\player_anim.json">
       <Link>Content\Animations\player_anim.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
