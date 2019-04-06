@@ -52,12 +52,19 @@ namespace Team6.Engine.Misc
 #else
         private void InitDpi()
         {
-            using (Graphics graphics = Graphics.FromHwnd(IntPtr.Zero))
+            try
             {
-                RawDpiX = graphics.DpiX;
-                RawDpiY = graphics.DpiY;
-                ScalingFactor = RawDpiX / 96f;
-                DpiChanged?.Invoke();
+                using (Graphics graphics = Graphics.FromHwnd(IntPtr.Zero))
+                {
+                    RawDpiX = graphics.DpiX;
+                    RawDpiY = graphics.DpiY;
+                    ScalingFactor = RawDpiX / 96f;
+                    DpiChanged?.Invoke();
+                }
+            }
+            catch
+            {
+                // Just use the default DPI
             }
         }
 #endif
