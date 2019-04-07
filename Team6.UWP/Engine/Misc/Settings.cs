@@ -31,8 +31,20 @@ namespace Team6.Engine.Misc
         {
 #if LINUX
             // IsolatedStorageFile throws an exception on mono.
-            // To quickly work around that, lets just not save any settings
-            settings = new T();
+            // Instead, let's just store the settings in the application folder
+            String path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, FileName);
+            if (File.Exists(path))
+            {
+                using (System.IO.StreamReader file = new System.IO.StreamReader(path))
+                {
+                    settings = (T)JsonSerializer.Create().Deserialize(file, typeof(T));
+                }
+
+            }
+            else
+            {
+                settings = new T();
+            }
 #else
             using (var userStorage = IsolatedStorageFile.GetUserStoreForApplication())
             {
@@ -59,7 +71,11 @@ namespace Team6.Engine.Misc
         public static void Save()
         {
 #if LINUX
-            // do nothing
+            String path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, FileName);
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(path))
+            {
+                JsonSerializer.Create().Serialize(file, settings);
+            }
 #else
             using (var userStorage = IsolatedStorageFile.GetUserStoreForApplication())
             {
