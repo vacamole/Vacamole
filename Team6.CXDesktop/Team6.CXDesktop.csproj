@@ -246,6 +246,9 @@
     <Compile Include="..\Team6.UWP\Game\Components\AIBehaviors\WanderingBehavior.cs">
       <Link>Game\Components\AIBehaviors\WanderingBehavior.cs</Link>
     </Compile>
+    <Compile Include="..\Team6.UWP\Game\Components\AIBehaviors\UnstuckBehavior.cs">
+      <Link>Game\Components\AIBehaviors\UnstuckBehavior.cs</Link>
+    </Compile>
     <Compile Include="..\Team6.UWP\Game\Components\AI\StayInBarnComponent.cs">
       <Link>Game\Components\AI\StayInBarnComponent.cs</Link>
     </Compile>
