@@ -75,6 +75,16 @@ namespace Team6.Engine.Input
                 mapping.Execute(ref frame);
         }
 
+        internal int GetFirstConnectedGamePad()
+        {
+            for(int i = 0; i< currentState.Length; i++)
+            {
+                if (currentState[i].IsConnected)
+                    return i;
+            }
+            return -1;
+        }
+
         public void SetRumble(PlayerInfo playerInfo, float lowFrequencyStrength, float highFrequencyStrength, float duration)
         {
             if (playerInfo.IsKeyboardPlayer)

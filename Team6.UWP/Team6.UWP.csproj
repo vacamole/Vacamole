@@ -198,6 +198,7 @@
     <Compile Include="Game\Scenes\RightToLeftGameScene.cs" />
     <Compile Include="Game\Scenes\LoadingScene.cs" />
     <Compile Include="Game\Scenes\StartScreenScene.cs" />
+    <Compile Include="Game\Scenes\TutorialScene.cs" />
     <Compile Include="MainGame.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Engine\Renderer2d.cs" />

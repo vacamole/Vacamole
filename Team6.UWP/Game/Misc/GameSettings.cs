@@ -11,7 +11,7 @@ namespace Team6.Game.Misc
         public float SoundVolume { get; set; } = 1;
         public float MusicVolume { get; set; } = 1;
         public float MasterVolume { get; set; } = 1;
-
         public bool IsFullscreen { get; set; } = true;
+        public bool ShowTutorial { get; set; } = true;
     }
 }
